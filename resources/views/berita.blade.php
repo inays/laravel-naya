@@ -1,26 +1,27 @@
-{{-- ==========================
-File: resources/views/berita.blade.php
-========================== --}}
 @extends('layouts.app')
 
 @section('title', 'Berita')
 
 @section('content')
-    <h1>Halaman Berita</h1>
-    <p>Berikut beberapa berita terbaru seputar dunia teknologi:</p>
-
-    <article>
-        <h2>Berita 1: Laravel 11 Dirilis</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer suscipit libero vel ante aliquet, sed consequat lorem malesuada.</p>
-    </article>
-
-    <article>
-        <h2>Berita 2: AI Semakin Populer</h2>
-        <p>Curabitur at dui feugiat, elementum odio sed, dapibus neque. Aliquam erat volutpat. Praesent egestas tincidunt ligula.</p>
-    </article>
-
-    <article>
-        <h2>Berita 3: Teknologi Cloud di Indonesia</h2>
-        <p>Donec ac sapien non nunc rhoncus aliquet. Aenean suscipit lectus sed tortor feugiat, at placerat felis tristique.</p>
-    </article>
+<h2>Berita Terkini Laravel 📰</h2>
+<div class="grid">
+    <div class="card">
+        <img src="https://laravel.com/img/logomark.min.svg" alt="Laravel 11">
+        <h3>Laravel 11 Resmi Dirilis</h3>
+        <p>Framework Laravel versi terbaru kini hadir dengan performa lebih cepat dan fitur baru untuk developer.</p>
+        <button>Baca Selengkapnya</button>
+    </div>
+    <div class="card">
+        <img src="https://cdn.pixabay.com/photo/2016/11/19/14/00/code-1839406_960_720.jpg" alt="Tips Laravel">
+        <h3>5 Tips Cepat Belajar Laravel</h3>
+        <p>Tingkatkan skill coding kamu dengan 5 tips simpel ini untuk memahami Laravel lebih cepat.</p>
+        <button>Baca Selengkapnya</button>
+    </div>
+    <div class="card">
+        <img src="https://cdn.pixabay.com/photo/2015/04/23/17/41/javascript-736400_960_720.jpg" alt="Integrasi VueJS">
+        <h3>Integrasi Laravel dan Vue.js</h3>
+        <p>Gabungkan kekuatan Laravel dengan Vue.js untuk membangun aplikasi SPA modern.</p>
+        <button>Baca Selengkapnya</button>
+    </div>
+</div>
 @endsection
