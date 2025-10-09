@@ -10,7 +10,7 @@
         <img src="{{ asset('image/profile.jpg') }}" alt="Foto Profil" class="profile-img">
 
         <div class="profile-info">
-            <h2>Rizka Okta</h2>
+            <h2>Inayah Sykan Nazifa</h2>
             <p class="status">Mahasiswa S1 Teknologi Informasi<br>
                 Fakultas Teknik dan Ilmu Komputer<br>
                 Universitas Muhammadiyah Semarang

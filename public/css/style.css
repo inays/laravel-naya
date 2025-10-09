@@ -443,7 +443,7 @@ body.dark footer {
 }
 
 .hero-image img {
-    width: 300px;
+    width: 100px;
     border-radius: 20px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
@@ -530,7 +530,7 @@ body.dark footer {
 
 .news-card img {
     width: 100%;
-    height: 200px;
+    height: 100px;
     object-fit: cover;
 }
 
@@ -567,7 +567,7 @@ body.dark footer {
     }
 
     .hero-image img {
-        width: 200px;
+        width: 50px;
         margin-top: 20px;
     }
 
