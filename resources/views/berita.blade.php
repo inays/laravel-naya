@@ -22,6 +22,21 @@
         <h3>Integrasi Laravel dan Vue.js</h3>
         <p>Gabungkan kekuatan Laravel dengan Vue.js untuk membangun aplikasi SPA modern.</p>
         <button>Baca Selengkapnya</button>
+        <a href="{{ route('berita.show', ['slug' => $item->slug]) }}">
+            @foreach ($berita as $item)
+    <div class="card">
+        <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->judul }}">
+        <h3>{{ $item->judul }}</h3>
+        <p>{{ Str::limit($item->konten, 100) }}</p>
+        <a href="{{ route('berita.show', ['slug' => $item->slug]) }}">
+            <button>Baca Selengkapnya</button>
+        </a>
+    </div>
+@endforeach
+
+    <button>Baca Selengkapnya</button>
+</a>
+
     </div>
 </div>
 @endsection
