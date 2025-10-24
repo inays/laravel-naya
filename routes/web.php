@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\MahasiswaController;
 
+Route::resource('mahasiswa', MahasiswaController::class);
+
+
 // Route untuk halaman statis
 Route::get('/home', function () {
     return view('home');
