@@ -32,5 +32,6 @@ class Berita extends Model
     {
         // Mencari berita dengan kolom 'slug' sesuai parameter
         return self::where('slug', $slug)->first();
+        
     }
 }

@@ -15,9 +15,14 @@ class MahasiswaController extends BaseController
     // Menampilkan semua data mahasiswa
     public function index()
     {
+        $data= Mahasiswa::all();
+
+
+
         $mahasiswas = Mahasiswa::all();
         return view('mahasiswa', [
             "title" => "Data Mahasiswa",
+            compact('data'),
             "mahasiswas" => $mahasiswas
         ]);
     }

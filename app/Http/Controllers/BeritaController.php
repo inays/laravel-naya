@@ -9,17 +9,7 @@ class BeritaController extends Controller
 {
     public function index()
     {
-        return view('berita', [
-            "title" => "Berita",
-            "beritas" => Berita::all()
-        ]);
-    }
-
-    public function tampildata($slug)
-    {
-        return view('singleberita', [
-            "title" => "Berita",
-            "berita" => Berita::where('slug', $slug)->first()
-        ]);
+        $berita = Berita::all(); // ambil semua data dari tabel berita
+        return view('berita', compact('berita')); // kirim ke view
     }
 }
