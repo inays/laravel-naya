@@ -23,6 +23,10 @@ Route::get('/contact', function () {
 // Route untuk berita
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
+Route::get('/tambahmahasiswa', [MahasiswaController::class])->name('tambahmahasiswa');
+
+Route::post('/tambahmahasiswa', [MahasiswaController::class])->name('insertdata');
+
 
 // Route untuk data mahasiswa
 Route::get('/datamahasiswa', [MahasiswaController::class, 'index']);

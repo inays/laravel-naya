@@ -2,6 +2,7 @@
 
 @section('content')
     <h1 class="text-center">Data Mahasiswa</h1>
+    <div></div>
     <br>
     <button type="button" class="btn btn-success">Tambah Data+</button>
     protected $fillable = ['nama', 'nim', 'email', 'jurusan', 'alamat'];
