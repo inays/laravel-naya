@@ -1,50 +1,45 @@
-@extends('layouts.main')
+@extends('layouts.app')
+
+@section('title', 'Data Mahasiswa')
 
 @section('content')
-    <h1 class="text-center">Data Mahasiswa</h1>
-    <div></div>
-    <br>
-    <button type="button" class="btn btn-success">Tambah Data+</button>
-    protected $fillable = ['nama', 'nim', 'email', 'jurusan', 'alamat'];
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">nama</th>
-      <th scope="col">NIM</th>
-      <th scope="col">nohp</th>
-      <th scope="col">aksi</th>
-      
-    </tr>
-  </thead>
-  <tbody>
-    @foreach ($data as $mahasiswa )
-    
-    @endforeach
-    <tr>
-      <th scope="row">1</th>
-      <td>Inayah Sykan Nazifa</td>
-      <td>13242420028</td>
-      <td>087853264806</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Aldi Winata</td>
-      <td>1324242013</td>
-      <td>089865231441</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Rizka Oktavia</td>
-      <td>1324242012</td>
-      <td>08512351176</td>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">📚 Data Mahasiswa</h1>
 
-      <button type="button" class="btn btn-primary">Primary</button>
-      <button type="button" class="btn btn-danger">Danger</button>
+    <a href="{{ route('tambahmahasiswa') }}" class="btn btn-primary mb-3">+ Tambah Mahasiswa</a>
 
-    </tr>
-    @endforeach
-  </tbody>
-</table>
+    @if(session('success'))
+        <div class="alert alert-success text-center">{{ session('success') }}</div>
+    @endif
 
-
+    <table class="table table-bordered">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>NIM</th>
+                <th>Kelas</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($mahasiswas as $index => $mhs)
+                <tr>
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ $mhs->nama }}</td>
+                    <td>{{ $mhs->nim }}</td>
+                    <td>{{ $mhs->kelas }}</td>
+                    <td class="text-center">
+                        <a href="{{ route('editmahasiswa', $mhs->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ route('deletemahasiswa', $mhs->id) }}" 
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Yakin ingin menghapus?')">Hapus</a>
+                    </td>
+                </tr>
+            @empty
+                <tr><td colspan="5" class="text-center text-muted">Belum ada data mahasiswa</td></tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
 @endsection

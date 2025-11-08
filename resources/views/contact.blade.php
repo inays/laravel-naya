@@ -1,50 +1,42 @@
 @extends('layouts.app')
 
-@section('title', 'Kontak')
+@section('title', 'Kontak Kami')
 
 @section('content')
-<div class="contact-container">
-    <h1 class="contact-title">Hubungi Saya</h1>
-    <p class="contact-subtitle">Punya pertanyaan, saran, atau ingin bekerja sama? Kirim pesanmu di bawah ini 👇</p>
+<div class="container mt-5 mb-5">
+    <h1 class="text-center mb-4">Hubungi Kami</h1>
 
-    <div class="contact-wrapper">
-        <!-- Form Kontak -->
-        <div class="contact-form">
-            <form action="#" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="name">Nama Lengkap</label>
-                    <input type="text" id="name" name="name" placeholder="Masukkan nama lengkap kamu" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Alamat Email</label>
-                    <input type="email" id="email" name="email" placeholder="Masukkan email kamu" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Pesan</label>
-                    <textarea id="message" name="message" rows="5" placeholder="Tulis pesan kamu di sini..." required></textarea>
-                </div>
-
-                <button type="submit" class="btn-send">Kirim Pesan</button>
-            </form>
+    @if(session('success'))
+        <div class="alert alert-success text-center">
+            {{ session('success') }}
         </div>
+    @endif
 
-        <!-- Info Kontak -->
-        <div class="contact-info">
-            <h2>Informasi Kontak</h2>
-            <p><strong>Alamat:</strong> Jl. Kedungmundu Raya No.17, Semarang</p>
-            <p><strong>Email:</strong> sykaninay@gmail.com</p>
-            <p><strong>No. HP:</strong> +62 812-3456-7890</p>
+    <div class="card p-4 shadow-lg">
+        <form action="{{ route('contact.send') }}" method="POST">
+            @csrf
 
-            <h3>Ikuti Saya</h3>
-            <div class="social-links">
-                <a href="#" class="social facebook">Facebook</a>
-                <a href="#" class="social instagram">Instagram</a>
-                <a href="#" class="social github">GitHub</a>
+            <div class="mb-3">
+                <label class="form-label">Nama</label>
+                <input type="text" name="name" class="form-control" placeholder="Masukkan nama kamu" required>
             </div>
-        </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Masukkan email kamu" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Pesan</label>
+                <textarea name="message" class="form-control" rows="5" placeholder="Tulis pesan kamu..." required></textarea>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary px-4 py-2">
+                    <i class="fa-solid fa-paper-plane"></i> Kirim Pesan
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 @endsection

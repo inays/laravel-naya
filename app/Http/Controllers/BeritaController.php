@@ -2,14 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Berita;
 use Illuminate\Http\Request;
+use App\Models\Berita;
 
 class BeritaController extends Controller
 {
     public function index()
     {
-        $berita = Berita::all(); // ambil semua data dari tabel berita
-        return view('berita', compact('berita')); // kirim ke view
+        $beritas = Berita::all();
+        return view('berita', compact('beritas'));
+    }
+
+    public function show($slug)
+    {
+        $berita = Berita::where('slug', $slug)->firstOrFail();
+        return view('berita_detail', compact('berita'));
     }
 }
