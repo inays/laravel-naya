@@ -6,6 +6,7 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,75 +14,57 @@ use App\Http\Controllers\ContactController;
 |--------------------------------------------------------------------------
 |
 | Semua route utama aplikasi Laravel kamu ada di sini.
-| Pastikan setiap controller memiliki method sesuai dengan route yang dipanggil.
 |
 */
 
 // =====================
-// 🏠 HALAMAN UTAMA (HOME)
+// 🏠 HALAMAN UTAMA
 // =====================
 
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
 Route::get('/home', [HomeController::class, 'home'])->name('home');
 
 // =====================
-// 🎓 DATA MAHASISWA
+// 🎓 CRUD MAHASISWA
 // =====================
 
 // Menampilkan daftar mahasiswa
-Route::get('/datamahasiswa', [MahasiswaController::class, 'index'])->name('datamahasiswa');
+Route::get('/datamahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
 
-// Menampilkan form tambah mahasiswa
-Route::get('/tambahmahasiswa', [MahasiswaController::class, 'tambahmahasiswa'])->name('tambahmahasiswa');
+// Form tambah mahasiswa
+Route::get('/tambahmahasiswa', [MahasiswaController::class, 'create'])->name('mahasiswa.create');
 
-// Proses insert data mahasiswa ke database
-Route::post('/tambahmahasiswa', [MahasiswaController::class, 'insertdata'])->name('insertdata');
+// Proses simpan data
+Route::post('/simpandata', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
 
-// Edit data mahasiswa
-Route::get('/editmahasiswa/{id}', [MahasiswaController::class, 'edit'])->name('editmahasiswa');
+// Edit mahasiswa
+Route::get('/editmahasiswa/{id}', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
 
-// Update data mahasiswa
-Route::post('/updatemahasiswa/{id}', [MahasiswaController::class, 'update'])->name('updatemahasiswa');
+// Proses update mahasiswa
+Route::post('/updatemahasiswa/{id}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
 
-// Hapus data mahasiswa
-Route::get('/deletemahasiswa/{id}', [MahasiswaController::class, 'delete'])->name('deletemahasiswa');
+// Hapus mahasiswa
+Route::get('/deletemahasiswa/{id}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.delete');
 
 // =====================
 // 📰 BERITA
 // =====================
 
-// Halaman daftar berita
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
-
-// Halaman detail berita berdasarkan slug
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
 
 // =====================
 // 👤 PROFIL & KONTAK
 // =====================
 
-// Halaman profil
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
-
-// Halaman kontak (tampilkan form)
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-
-// Proses kirim pesan dari form kontak
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
-// 🎓 MAHASISWA
-Route::get('/datamahasiswa', [MahasiswaController::class, 'index'])->name('datamahasiswa');
-Route::get('/tambahmahasiswa', [MahasiswaController::class, 'tambahmahasiswa'])->name('tambahmahasiswa');
-Route::post('/tambahmahasiswa', [MahasiswaController::class, 'insertdata'])->name('insertdata');
-Route::get('/editmahasiswa/{id}', [MahasiswaController::class, 'edit'])->name('editmahasiswa');
-Route::post('/updatemahasiswa/{id}', [MahasiswaController::class, 'update'])->name('updatemahasiswa');
-Route::get('/deletemahasiswa/{id}', [MahasiswaController::class, 'delete'])->name('deletemahasiswa');
-
 
 // =====================
-// 🚀 ERROR HANDLER (opsional)
+// 🚀 ERROR HANDLER
 // =====================
 
-// Jika halaman tidak ditemukan
 Route::fallback(function () {
     return response()->view('errors.404', [], 404);
 });
