@@ -1,13 +1,12 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\BeritaController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\DataController;
-
+use App\Http\Controllers\PublicProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,53 +17,56 @@ use App\Http\Controllers\DataController;
 */
 
 // =====================
-// 🏠 HALAMAN UTAMA
+// 🏠 HALAMAN UTAMA (PUBLIC)
 // =====================
 
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
 Route::get('/home', [HomeController::class, 'home'])->name('home');
 
 // =====================
-// 🎓 CRUD MAHASISWA
-// =====================
-
-// Menampilkan daftar mahasiswa
-Route::get('/datamahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
-
-// Form tambah mahasiswa
-Route::get('/tambahmahasiswa', [MahasiswaController::class, 'create'])->name('mahasiswa.create');
-
-// Proses simpan data
-Route::post('/simpandata', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
-
-// Edit mahasiswa
-Route::get('/editmahasiswa/{id}', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
-
-// Proses update mahasiswa
-Route::post('/updatemahasiswa/{id}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
-
-// Hapus mahasiswa
-Route::get('/deletemahasiswa/{id}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.delete');
-
-// =====================
-// 📰 BERITA
+// 📰 BERITA (PUBLIC)
 // =====================
 
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
 
 // =====================
-// 👤 PROFIL & KONTAK
+// 👤 KONTAK (PUBLIC)
 // =====================
 
-Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+Route::get('/my-profile', [PublicProfileController::class, 'show'])->name('public.profile');
 
 // =====================
-// 🚀 ERROR HANDLER
+// 🎓 MAHASISWA (READ PUBLIC, WRITE PROTECTED)
 // =====================
 
-Route::fallback(function () {
-    return response()->view('errors.404', [], 404);
+// List (Bisa dibuat public atau protected, saya buat public agar 'tidak menghilangkan halaman')
+Route::get('/datamahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
+
+// Middleware Group for Protected Actions
+Route::middleware('auth')->group(function () {
+    
+    // CRUD Mahasiswa
+    Route::get('/tambahmahasiswa', [MahasiswaController::class, 'create'])->name('mahasiswa.create');
+    Route::post('/simpandata', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
+    Route::get('/editmahasiswa/{id}', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
+    Route::post('/updatemahasiswa/{id}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
+    Route::get('/deletemahasiswa/{id}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
+
+    // Profile (Breeze)
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// =====================
+// 🔐 DASHBOARD (Breeze)
+// =====================
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+// Auth Routes
+require __DIR__.'/auth.php';

@@ -24,9 +24,19 @@
             <ul class="nav-links">
                 <li><a href="/home"><i class="fa-solid fa-house"></i> Home</a></li>
                 <li><a href="/berita"><i class="fa-regular fa-newspaper"></i> Berita</a></li>
-                <li><a href="/profile"><i class="fa-solid fa-user"></i> Profile</a></li>
+                <li><a href="/my-profile"><i class="fa-solid fa-user"></i> Profile</a></li>
                 <li><a href="/contact"><i class="fa-solid fa-envelope"></i> Contact</a></li>
                 <li><a href="/datamahasiswa">Mahasiswa</a></li>
+                @if (Route::has('login'))
+                    @auth
+                        <li><a href="{{ url('/dashboard') }}" class="text-success"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                    @else
+                        <li><a href="{{ route('login') }}"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
+                        @if (Route::has('register'))
+                            <li><a href="{{ route('register') }}"><i class="fa-solid fa-user-plus"></i> Register</a></li>
+                        @endif
+                    @endauth
+                @endif
 
             </ul>
 

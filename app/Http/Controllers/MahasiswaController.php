@@ -15,13 +15,13 @@ class MahasiswaController extends Controller
     }
 
     // 🔹 FORM TAMBAH
-    public function tambahmahasiswa()
+    public function create()
     {
         return view('tambahmahasiswa');
     }
 
     // 🔹 SIMPAN DATA BARU
-    public function insertdata(Request $request)
+    public function store(Request $request)
     {
         $request->validate([
             'nama' => 'required',
@@ -30,7 +30,7 @@ class MahasiswaController extends Controller
         ]);
 
         Mahasiswa::create($request->all());
-        return redirect()->route('datamahasiswa')->with('success', 'Data berhasil ditambahkan!');
+        return redirect()->route('mahasiswa.index')->with('success', 'Data berhasil ditambahkan!');
     }
 
     // 🔹 FORM EDIT
@@ -43,15 +43,21 @@ class MahasiswaController extends Controller
     // 🔹 UPDATE DATA
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama' => 'required',
+            'nim' => 'required|numeric|unique:mahasiswa,nim,' . $id,
+            'kelas' => 'required',
+        ]);
+
         $mhs = Mahasiswa::findOrFail($id);
         $mhs->update($request->all());
-        return redirect()->route('datamahasiswa')->with('success', 'Data berhasil diperbarui!');
+        return redirect()->route('mahasiswa.index')->with('success', 'Data berhasil diperbarui!');
     }
 
     // 🔹 HAPUS DATA
-    public function delete($id)
+    public function destroy($id)
     {
         Mahasiswa::destroy($id);
-        return redirect()->route('datamahasiswa')->with('success', 'Data berhasil dihapus!');
+        return redirect()->route('mahasiswa.index')->with('success', 'Data berhasil dihapus!');
     }
 }

@@ -1,15 +1,8 @@
 @extends('layouts.app')
-@section('content')
-@extends('layouts.app')
 
-@section('title', 'Tambah Mahasiswa')
+@section('title', $berita->judul)
 
-@section('content')
-   <!-- isi konten halaman -->
-@endsection
-
-
-<div class="container mt-5">
+@section('content')<div class="container mt-5">
     <div class="card shadow">
         @if($berita->gambar)
             <img src="{{ asset('storage/' . $berita->gambar) }}" class="card-img-top" alt="{{ $berita->judul }}" style="height: 350px; object-fit: cover;">

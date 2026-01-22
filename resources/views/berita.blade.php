@@ -1,15 +1,7 @@
-@extends('layouts.app') {{-- opsional kalau kamu pakai layout utama --}}
-@section('content')
-@extends('layouts.app')
+@extends('layouts.app') 
+@section('title', 'Berita')
 
-@section('title', 'Tambah Mahasiswa')
-
-@section('content')
-   <!-- isi konten halaman -->
-@endsection
-
-
-<div class="container mt-4">
+@section('content')<div class="container mt-4">
     <h2 class="text-center mb-4">Daftar Berita Terbaru</h2>
 
     <div class="row">
