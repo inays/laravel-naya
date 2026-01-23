@@ -29,7 +29,14 @@
                 <li><a href="/datamahasiswa">Mahasiswa</a></li>
                 @if (Route::has('login'))
                     @auth
-                        <li><a href="{{ url('/dashboard') }}" class="text-success"><i class="fa-solid fa-gauge"></i> Dashboard</a></li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                                @csrf
+                                <button type="submit" style="background:none; border:none; color:inherit; cursor:pointer; font:inherit; padding:0;">
+                                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                                </button>
+                            </form>
+                        </li>
                     @else
                         <li><a href="{{ route('login') }}"><i class="fa-solid fa-right-to-bracket"></i> Login</a></li>
                         @if (Route::has('register'))

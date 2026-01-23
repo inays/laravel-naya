@@ -20,7 +20,9 @@ use App\Http\Controllers\PublicProfileController;
 // 🏠 HALAMAN UTAMA (PUBLIC)
 // =====================
 
-Route::get('/', [HomeController::class, 'index'])->name('welcome');
+Route::get('/', function () {
+    return redirect()->route('login');
+});
 Route::get('/home', [HomeController::class, 'home'])->name('home');
 
 // =====================
@@ -61,12 +63,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// =====================
-// 🔐 DASHBOARD (Breeze)
-// =====================
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 // Auth Routes
 require __DIR__.'/auth.php';
